@@ -1,0 +1,308 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antiliased; /*Funcionara apenas em navegadores que forem webkit (Chrome, safari)*/
+}
+html {
+  font-size: 62.5%;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 2.7rem;
+  color: #23232e;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+a {
+  color: #ffff;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 1.6rem;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #23232e;
+  height: 8vh;
+  width: 100%;
+  
+  margin: auto;
+
+  /* display: grid;
+  height: 7vh;
+  width: 100vw;
+  align-items: center;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "a logo nav-list";
+  background: #23232e; */
+}
+a.logo {
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  /* grid-area: logo; */
+  justify-self: center;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  cursor: pointer;
+  /* grid-area: nav-list;
+  justify-content: end; */
+  margin-right: 32px;
+}
+
+.nav-list li {
+  margin-left: 32px;
+}
+
+/*index*/
+
+.container {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+.list-campanha {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-campanha img {
+  padding: 1px;
+  margin: 5px;
+  background: #cacad3;
+  border-radius: 7px;
+  cursor: pointer;
+  flex: 1 1 20px;
+}
+
+/*cadastro_doador1*/
+form {
+  width: 100vw;
+  height: 80vh;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+label {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  background: #23232e;
+  width: 280px;
+  height: 30px;
+  padding: 0 8px;
+  margin-top: 8px;
+  border-radius: 7px;
+  color: white;
+}
+.btn-enviar {
+  margin: 10px;
+  width: 80px;
+  height: 40px;
+  border-color: white;
+  background: #23232e;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+span#enviar {
+  color: white;
+}
+
+::-webkit-input-placeholder {
+  color: white;
+  font-weight: bold;
+}
+
+/*cadastro_doador2*/
+/* .label {
+  margin-top: 1.5rem;
+} */
+.label span {
+  font-size: 1.76rem;
+}
+.label select {
+  background: #23232e;
+  width: 320px;
+  height: 35px;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 7px;
+  color: white;
+}
+/*Login*/
+.container-login {
+  width: 100vw;
+  background: url(imagens/background_login.svg) no-repeat center center;
+}
+#h1-login {
+  color: white;
+}
+
+.form-login {
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.div-login {
+  background: #23232e;
+  padding: 8px;
+  border-color: #23232e;
+  border-style: solid;
+  border-radius: 7px;
+  width: 300px;
+}
+
+/*Login_funcionario*/
+
+label .facebook {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  background: #3b5998;
+  padding: 8px;
+  border-color: #23232e;
+  border-style: solid;
+  border-radius: 7px;
+}
+
+label .google {
+  display: flex;
+  align-items: center;
+  color: #23232e;
+  background: white;
+  padding: 8px;
+  border-color: #23232e;
+  border-style: solid;
+  border-radius: 7px;
+}
+
+#span1 {
+  display: flex;
+  flex: auto;
+  justify-content: center;
+}
+
+#span2 {
+  display: flex;
+  flex: auto;
+  justify-content: center;
+}
+input#user.validate {
+  background: white;
+  color: #23232e;
+}
+input#senha_login.validate {
+  background: white;
+  color: #23232e;
+}
+.btn-entrar {
+  margin: 10px;
+  width: 80px;
+  height: 40px;
+  border-color: white;
+  background: white;
+  color: #23232e;
+  font-weight: bold;
+  border-radius: 7px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+div.entrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tela_inicial */
+.list-funcoes {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  width: 100%;
+}
+li#li-funcoes {
+  display: flex;
+  margin: 6px;
+  color: #23232e;
+  width: 260px;
+  height: 366px;
+  border: 1px solid;
+  border-color: #cbcbcb;
+  border-radius: 7px;
+  justify-content: center;
+}
+.li-img {
+  border-radius: 7px;
+  width: 262px;
+}
+h2 {
+  color: #23232e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+span {
+  margin: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+}
+#spanHome {
+  color: #23232e;
+}
+
+.perfil-img {
+  width: 200px;
+  height: 200px;
+}
+label.pesquisar-familiar {
+  margin: 0 0 50px;
+}
+
+/* @media queries */
+@media (max-width: 768px) {
+  
+}

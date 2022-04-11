@@ -1,0 +1,77 @@
+<!--<?php include "cabecalho.php"?>-->
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>MakeGood</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="logo" href="index.html">Make Good</a>
+        <ul class="nav-list">
+          <li>
+            <a href="index.html">Voltar</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <form>
+        <h1>Cadastro de doador</h1>
+        <label for="nome_completo">
+          <span>Nome completo</span>
+          <input
+            placeholder=""
+            id="nome_completo"
+            type="text"
+            class="validate"
+          />
+        </label>
+        <label for="data_nascimento">
+          <span>Data de nascimento</span>
+          <input id="data_nascimento" type="date" class="validate" />
+        </label>
+
+        <label for="telefone">
+          <span>Telefone</span>
+          <input placeholder="" id="telefone" type="text" class="validate" />
+        </label>
+
+        <label for="email">
+          <span>E-mail</span>
+          <input placeholder="" id="email" type="email" class="validate" />
+        </label>
+
+        <label for="endereco">
+          <span>Endereço</span>
+          <input placeholder="" id="endereco" type="text" class="validate" />
+        </label>
+
+        <label for="numero">
+          <span>Número</span>
+          <input placeholder="" id="numero" type="number" class="validate" />
+        </label>
+
+        <label for="bairro">
+          <span>Bairro</span>
+          <input id="bairro" type="text" class="validate" />
+        </label>
+
+        <a class="btn-enviar" href="cadastro_doador2.html">
+          <span id="enviar">Enviar</span>
+        </a>
+      </form>
+    </main>
+  </body>
+</html>
