@@ -87,6 +87,11 @@ a.logo {
   list-style: none;
   align-items: center;
   justify-content: center;
+  padding: 0;
+}
+
+.list-campanha li {
+  margin: auto;
 }
 
 .list-campanha img {
@@ -157,7 +162,7 @@ span#enviar {
   background: #23232e;
   width: 280px;
   height: 35px;
-  padding: 8px;
+  padding: 0 8px;
   margin-top: 8px;
   border-radius: 7px;
   color: white;
