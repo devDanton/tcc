@@ -1,16 +1,17 @@
 <?php include "cabecalho.php";
+include "conexao.php";
 $mensagem = "Preencha todos os campos!";
-$nome;
-$data_nascimento;
-$telefone;
-$email;
-$endereco;
-$numero;
-$bairro;
+$nome = "";
+$data_nascimento = "";
+$telefone = "";
+$email = "";
+$endereco = "";
+$numero = "";
+$bairro = "";
 $status = false;
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"])) {
-  $conexao = new PDO("mysql:host=localhost;dbname=tcc", "root", "");
+  //$conexao = new PDO("mysql:host=localhost;dbname=tcc", "root", ""); //Substitui pelo include da página conexão
   //filtrando inputs para remover caracteres que não correspondem ao padrão
   $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_STRING);
   $data_nascimento = filter_input(INPUT_POST, "data_nascimento");
@@ -94,9 +95,9 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       </button>
 
     </form>
-    <?
+    <?php
     if ($status == true) {
-      header('Location: cadastro_doador2.html');
+      header('Location: cadastro_doador2.php');
     }
     ?>
   </main>

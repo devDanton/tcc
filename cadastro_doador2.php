@@ -1,7 +1,37 @@
-<?php include "cabecalho.php"
+<?php include "cabecalho.php";
+include "conexao.php";
+$mensagem = "Preencha todos os campos!";
+$camisa = "";
+$calca = "";
+$sapato = "";
+$meia = "";
+$cueca = "";
+$status = false;
+
+if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $_POST["cueca"])) {
+  //filtrando inputs para remover caracteres que não correspondem ao padrão
+  $camisa = filter_input(INPUT_POST, "camisa", FILTER_SANITIZE_STRING);
+  $calca = filter_input(INPUT_POST, "calca", FILTER_SANITIZE_NUMBER_INT);
+  $sapato = filter_input(INPUT_POST, "sapato", FILTER_SANITIZE_NUMBER_INT);
+  $meia = filter_input(INPUT_POST, "meia", FILTER_SANITIZE_STRING);
+  $cueca = filter_input(INPUT_POST, "cueca", FILTER_SANITIZE_STRING);
 
 
-
+  if (!$camisa || !$calça || !$sapato || !$meia || !$cueca) {
+    $mensagem = "Dados inválidos!";
+  } else {
+    /*statement*/
+    $stm = $conexao->prepare('INSERT INTO doador (tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES (:camisa, :calça, :sapato, :meia, :cueca)');
+    $stm->bindParam('camisa', $camisa);
+    $stm->bindParam('calca', $calca);
+    $stm->bindParam('sapato', $sapato);
+    $stm->bindParam('meia', $meia);
+    $stm->bindParam('cueca', $cueca);
+    $stm->execute();
+  }
+  $status = true;
+  $mensagem = "Enviado com sucesso!";
+}
 
 ?>
 
@@ -18,96 +48,100 @@
   </header>
 
   <main class="container">
-    <form>
+    <form method="POST">
       <h1>Medidas vestuário</h1>
       <div class="label">
         <span>Camisa</span>
         <label class="label_select">
-          <select class="browser-default">
+          <select class="browser-default" name="camisa" required>
             <option value="" disabled selected>Nenhum</option>
-            <option value="1">P</option>
-            <option value="2">P</option>
-            <option value="3">M</option>
-            <option value="4">G</option>
-            <option value="5">GG</option>
-            <option value="6">EG</option>
-            <option value="7">EGG</option>
+            <option value="P">P</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
+            <option value="GG">GG</option>
+            <option value="EG">EG</option>
+            <option value="EGG">EGG</option>
           </select>
         </label>
       </div>
 
       <div class="label">
         <span>Calça</span>
-        <label class="label_select">
-          <select class="browser-default">
+        <label class="label_select" name="calca">
+          <select class="browser-default" required>
             <option value="" disabled selected>Nenhum</option>
-            <option value="1">36</option>
-            <option value="2">38</option>
-            <option value="3">40</option>
-            <option value="4">42</option>
-            <option value="5">44</option>
-            <option value="6">46</option>
-            <option value="7">48</option>
-            <option value="8">50</option>
-            <option value="9">52</option>
-            <option value="10">54</option>
-            <option value="11">56</option>
-            <option value="12">58</option>
+            <option value="36">36</option>
+            <option value="38">38</option>
+            <option value="40">40</option>
+            <option value="42">42</option>
+            <option value="44">44</option>
+            <option value="46">46</option>
+            <option value="48">48</option>
+            <option value="50">50</option>
+            <option value="52">52</option>
+            <option value="54">54</option>
+            <option value="56">56</option>
+            <option value="58">58</option>
           </select>
         </label>
       </div>
 
       <div class="label">
         <span>Sapato</span>
-        <label class="label_select">
-          <select class="browser-default">
+        <label class="label_select" name="sapato">
+          <select class="browser-default" required>
             <option value="" disabled selected>Nenhum</option>
-            <option value="1">33</option>
-            <option value="2">34</option>
-            <option value="3">35</option>
-            <option value="4">36</option>
-            <option value="5">37</option>
-            <option value="6">38</option>
-            <option value="7">39</option>
-            <option value="8">39/40</option>
-            <option value="9">40</option>
-            <option value="10">41</option>
-            <option value="11">42</option>
-            <option value="12">43</option>
-            <option value="13">44</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
           </select>
         </label>
       </div>
 
       <div class="label">
         <span>Meia</span>
-        <label class="label_select">
-          <select class="browser-default">
+        <label class="label_select" name="meia">
+          <select class="browser-default" required>
             <option value="" disabled selected>Nenhum</option>
-            <option value="1">PP</option>
-            <option value="2">P</option>
-            <option value="3">M</option>
-            <option value="4">G</option>
+            <option value="PP">PP</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
           </select>
         </label>
       </div>
 
       <div class="label">
         <span>Cueca</span>
-        <label class="label_select">
-          <select class="browser-default">
+        <label class="label_select" name="cueca">
+          <select class="browser-default" required>
             <option value="" disabled selected>Nenhum</option>
-            <option value="1">P</option>
-            <option value="2">M</option>
-            <option value="3">G</option>
-            <option value="4">GG</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
+            <option value="GG">GG</option>
           </select>
         </label>
       </div>
-      <a class="btn-enviar" href="cadastro_doador3.html">
-        <span id="enviar">Enviar</span>
-      </a>
+      <button class="btn-enviar" type="submit">
+        <a id="enviar">Enviar</a>
+      </button>
     </form>
+    <?php
+    if ($status == true) {
+      header('Location: cadastro_doador3.php');
+    }
+    ?>
   </main>
 </body>
 
