@@ -1,6 +1,7 @@
-<?php include "cabecalho.php";
-include "conexao.php";
-$mensagem = "Preencha todos os campos!";
+<?php
+session_start(); //inicia sessão(); - guarda login do ususário neste computador
+include "cabecalho.php";
+include_once "conexao.php";
 $nome = "";
 $data_nascimento = "";
 $telefone = "";
@@ -11,7 +12,6 @@ $bairro = "";
 $status = false;
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"])) {
-  //$conexao = new PDO("mysql:host=localhost;dbname=tcc", "root", ""); //Substitui pelo include da página conexão
   //filtrando inputs para remover caracteres que não correspondem ao padrão
   $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_STRING);
   $data_nascimento = filter_input(INPUT_POST, "data_nascimento");
@@ -25,18 +25,19 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
     $mensagem = "Dados inválidos!";
   } else {
     /*statement*/
-    $stm = $conexao->prepare('INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro) VALUES (:nome, :data_nascimento, :telefone, :email, :endereco, :numero, :bairro)');
-    $stm->bindParam('nome', $nome);
-    $stm->bindParam('data_nascimento', $data_nascimento);
-    $stm->bindParam('telefone', $telefone);
-    $stm->bindParam('email', $email);
-    $stm->bindParam('endereco', $endereco);
-    $stm->bindParam('numero', $numero);
-    $stm->bindParam('bairro', $bairro);
-    $stm->execute();
+
+    $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro')";
+    $resultado_usuario = mysqli_query($conexao, $result_usuario);
+
+    if (mysqli_insert_id($conexao)) {
+      $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
+      header('Location: cadastro_doador2.php');
+    } else {
+      $_SESSION['msg'] = "<p style='color:red;'>Falha no envio</p>";
+      header('Location: cadastro_doador.php');
+    }
 
     $status = true;
-    $mensagem = "Enviado com sucesso!";
   }
 }
 ?>
@@ -93,13 +94,13 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
-
+      <?php
+      if (isset($_SESSION['msg'])) {
+        echo $_SESSION['msg']; //imprime mensagem de sucesso ou erro
+        unset($_SESSION['msg']); //destroi variavel
+      }
+      ?>
     </form>
-    <?php
-    if ($status == true) {
-      header('Location: cadastro_doador2.php');
-    }
-    ?>
   </main>
 </body>
 

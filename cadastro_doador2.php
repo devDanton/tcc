@@ -1,6 +1,7 @@
-<?php include "cabecalho.php";
-include "conexao.php";
-$mensagem = "Preencha todos os campos!";
+<?php
+session_start(); //inicia sessão(); - guarda login do ususário neste computador
+include "cabecalho.php";
+include_once "conexao.php";
 $camisa = "";
 $calca = "";
 $sapato = "";
@@ -8,31 +9,29 @@ $meia = "";
 $cueca = "";
 $status = false;
 
+
 if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $_POST["cueca"])) {
-  //filtrando inputs para remover caracteres que não correspondem ao padrão
-  $camisa = filter_input(INPUT_POST, "camisa", FILTER_SANITIZE_STRING);
-  $calca = filter_input(INPUT_POST, "calca", FILTER_SANITIZE_NUMBER_INT);
-  $sapato = filter_input(INPUT_POST, "sapato", FILTER_SANITIZE_NUMBER_INT);
-  $meia = filter_input(INPUT_POST, "meia", FILTER_SANITIZE_STRING);
-  $cueca = filter_input(INPUT_POST, "cueca", FILTER_SANITIZE_STRING);
+  $camisa = filter_input(INPUT_POST, "camisa");
+  $calca = filter_input(INPUT_POST, "calca");
+  $sapato = filter_input(INPUT_POST, "sapato");
+  $meia = filter_input(INPUT_POST, "meia");
+  $cueca = filter_input(INPUT_POST, "cueca");
 
-
-  if (!$camisa || !$calça || !$sapato || !$meia || !$cueca) {
+  if (!$camisa || !$calca || !$sapato || !$meia || !$cueca) {
     $mensagem = "Dados inválidos!";
   } else {
-    /*statement*/
-    $stm = $conexao->prepare('INSERT INTO doador (tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES (:camisa, :calça, :sapato, :meia, :cueca)');
-    $stm->bindParam('camisa', $camisa);
-    $stm->bindParam('calca', $calca);
-    $stm->bindParam('sapato', $sapato);
-    $stm->bindParam('meia', $meia);
-    $stm->bindParam('cueca', $cueca);
-    $stm->execute();
-  }
-  $status = true;
-  $mensagem = "Enviado com sucesso!";
-}
+    $result_usuario = "INSERT INTO doador(tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES('$camisa','$calca','$sapato','$meia', '$cueca') WHERE id = 79";
+    $resultado_usuario = mysqli_query($conexao, $result_usuario);
 
+    if (mysqli_insert_id($conexao)) {
+      $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
+      header('Location: cadastro_doador3.php');
+    } else {
+      $_SESSION['msg'] = "<p style='color:red;'>Falha no envio</p>";
+      header('Location: cadastro_doador2.php');
+    }
+  }
+}
 ?>
 
 <body>
@@ -68,8 +67,8 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
 
       <div class="label">
         <span>Calça</span>
-        <label class="label_select" name="calca">
-          <select class="browser-default" required>
+        <label class="label_select">
+          <select class="browser-default" name="calca" required>
             <option value="" disabled selected>Nenhum</option>
             <option value="36">36</option>
             <option value="38">38</option>
@@ -89,8 +88,8 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
 
       <div class="label">
         <span>Sapato</span>
-        <label class="label_select" name="sapato">
-          <select class="browser-default" required>
+        <label class="label_select">
+          <select class="browser-default" name="sapato" required>
             <option value="" disabled selected>Nenhum</option>
             <option value="33">33</option>
             <option value="34">34</option>
@@ -110,8 +109,8 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
 
       <div class="label">
         <span>Meia</span>
-        <label class="label_select" name="meia">
-          <select class="browser-default" required>
+        <label class="label_select">
+          <select class="browser-default" name="meia" required>
             <option value="" disabled selected>Nenhum</option>
             <option value="PP">PP</option>
             <option value="P">P</option>
@@ -123,8 +122,8 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
 
       <div class="label">
         <span>Cueca</span>
-        <label class="label_select" name="cueca">
-          <select class="browser-default" required>
+        <label class="label_select">
+          <select class="browser-default" name="cueca" required>
             <option value="" disabled selected>Nenhum</option>
             <option value="P">P</option>
             <option value="M">M</option>
@@ -136,6 +135,19 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
+
+      <?php
+      echo $camisa;
+      echo $calca;
+      echo $sapato;
+      echo $meia;
+      echo $cueca;
+
+      if (isset($_SESSION['msg'])) {
+        echo $_SESSION['msg']; //imprime mensagem de sucesso ou erro
+        unset($_SESSION['msg']); //destroi variavel
+      }
+      ?>
     </form>
     <?php
     if ($status == true) {
