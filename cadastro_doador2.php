@@ -20,7 +20,7 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
   if (!$camisa || !$calca || !$sapato || !$meia || !$cueca) {
     $mensagem = "Dados inválidos!";
   } else {
-    $result_usuario = "INSERT INTO doador(tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES('$camisa','$calca','$sapato','$meia', '$cueca') WHERE id = 79";
+    $result_usuario = "INSERT INTO doador(tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES('$camisa','$calca','$sapato','$meia', '$cueca')";
     $resultado_usuario = mysqli_query($conexao, $result_usuario);
 
     if (mysqli_insert_id($conexao)) {
