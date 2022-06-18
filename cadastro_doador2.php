@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "cabecalho.php";
 include_once "conexao.php";
 $camisa = "";
@@ -7,7 +8,6 @@ $sapato = "";
 $meia = "";
 $cueca = "";
 $status = false;
-$id_atual = "";
 
 if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $_POST["cueca"])) {
   $camisa = filter_input(INPUT_POST, "camisa");
@@ -19,18 +19,21 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
   if (!$camisa || !$calca || !$sapato || !$meia || !$cueca) {
     $mensagem = "Dados inválidos!";
   } else {
-    $id_atual = $_POST('id_atual');
-    echo $id_atual;
-    //$result_usuario = "INSERT INTO doador(tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES('$camisa','$calca','$sapato','$meia', '$cueca') ";
-    //$resultado_usuario = mysqli_query($conexao, $result_usuario);
+    $nome = $_SESSION['nome'];
+    $data_nascimento = $_SESSION['data_nascimento'];
+    $telefone = $_SESSION['telefone'];
+    $email = $_SESSION['email'];
+    $endereco = $_SESSION['endereco'];
+    $numero = $_SESSION['numero'];
+    $bairro = $_SESSION['bairro'];
 
-    /*if (mysqli_insert_id($conexao)) {
-      $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
-      header('Location: cadastro_doador3.php');
-    } else {
-      $_SESSION['msg'] = "<p style='color:red;'>Falha no envio</p>";
-      header('Location: cadastro_doador2.php');
-    }*/
+
+
+    $_SESSION['camisa'] = $camisa;
+    $_SESSION['calca'] = $calca;
+    $_SESSION['sapato'] = $sapato;
+    $_SESSION['meia'] = $meia;
+    $_SESSION['cueca'] = $cueca;
   }
 }
 ?>
@@ -48,7 +51,7 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
   </header>
 
   <main class="container">
-    <form method="POST">
+    <form method="POST" action="cadastro_doador3.php">
       <h1>Medidas vestuário</h1>
       <div class="label">
         <span>Camisa</span>
@@ -136,27 +139,27 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
+      <!--/if (isset($_SESSION['msg'])) {
+        echo $_SESSION['msg']; //imprime mensagem de sucesso ou erro
+        unset($_SESSION['msg']); //destroi variavel
+      }-->
 
       <?php
+      echo $nome;
+      echo $data_nascimento;
+      echo $telefone;
+      echo $email;
+      echo $endereco;
+      echo $numero;
+      echo $bairro;
+      echo "<br>";
       echo $camisa;
       echo $calca;
       echo $sapato;
       echo $meia;
-      echo "$cueca <br>";
-      echo $id_atual;
-
-
-      if (isset($_SESSION['msg'])) {
-        echo $_SESSION['msg']; //imprime mensagem de sucesso ou erro
-        unset($_SESSION['msg']); //destroi variavel
-      }
+      echo $cueca;
       ?>
     </form>
-    <?php
-    if ($status == true) {
-      header('Location: cadastro_doador3.php');
-    }
-    ?>
   </main>
 </body>
 

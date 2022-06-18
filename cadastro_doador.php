@@ -10,7 +10,6 @@ $endereco = "";
 $numero = "";
 $bairro = "";
 $status = false;
-$id_atual = "";
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"])) {
   //filtrando inputs para remover caracteres que não correspondem ao padrão
@@ -26,20 +25,18 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
     $mensagem = "Dados inválidos!";
   } else {
     /*statement*/
-    $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro')";
-    $resultado_usuario = mysqli_query($conexao, $result_usuario);
+    $_SESSION['nome'] = $nome;
+    $_SESSION['data_nascimento'] = $data_nascimento;
+    $_SESSION['telefone'] = $telefone;
+    $_SESSION['email'] = $email;
+    $_SESSION['endereco'] = $endereco;
+    $_SESSION['numero'] = $numero;
+    $_SESSION['bairro'] = $bairro;
+    /* Obtem ultimo id cadastrado 
     $conn->exec($result_usuario);
     $id_atual = $conn->lastInsertId();
-
-    if (mysqli_insert_id($conexao)) {
-      $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
-      header('Location: cadastro_doador2.php');
-    } else {
-      $_SESSION['msg'] = "<p style='color:red;'>Falha no envio</p>";
-      header('Location: cadastro_doador.php');
-    }
-
-    $status = true;
+    $_SESSION['lastID'] = $id_atual;
+    */
   }
 }
 ?>
@@ -57,12 +54,13 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   </header>
 
   <main class="container">
-    <form method="POST">
+    <form method="POST" action="cadastro_doador2.php">
       <h1>Cadastro de doador</h1>
       <label for="nome_completo">
         <span>Nome completo</span>
         <input placeholder="" id="nome_completo" name="nome" type="text" class="validate" required />
       </label>
+
       <label for="data_nascimento">
         <span>Data de nascimento</span>
         <input id="data_nascimento" name="data_nascimento" type="date" class="validate" required />
