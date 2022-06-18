@@ -16,10 +16,10 @@
 <body>
   <header>
     <nav class="navbar">
-      <a class="logo" href="index.html">Make Good</a>
+      <a class="logo" href="index.php">Make Good</a>
       <ul class="nav-list">
         <li>
-          <a href="cadastro_doador.html">Voltar</a>
+          <a href="cadastro_doador.php">Voltar</a>
         </li>
       </ul>
     </nav>

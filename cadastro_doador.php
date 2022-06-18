@@ -10,6 +10,7 @@ $endereco = "";
 $numero = "";
 $bairro = "";
 $status = false;
+$id_atual = "";
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"])) {
   //filtrando inputs para remover caracteres que não correspondem ao padrão
@@ -25,9 +26,10 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
     $mensagem = "Dados inválidos!";
   } else {
     /*statement*/
-
     $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro')";
     $resultado_usuario = mysqli_query($conexao, $result_usuario);
+    $conn->exec($result_usuario);
+    $id_atual = $conn->lastInsertId();
 
     if (mysqli_insert_id($conexao)) {
       $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
