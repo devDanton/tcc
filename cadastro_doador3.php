@@ -42,7 +42,7 @@ if (isset($_POST["usuario"], $_POST["senha"], $_POST["senha_repetida"])) {
       //$_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
       header('Location: login_doador.php');
     } else {
-      $_SESSION['msg'] = "<span style='color:red;'>Falha no envio</span>";
+      $_SESSION['msg'] = "<span style='color:red; display: flex; left:10px;'>Falha no envio</span>";
       header('Location: cadastro_doador3.php');
     }
   } else {

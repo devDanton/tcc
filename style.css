@@ -424,10 +424,12 @@ label select#tamanho-item {
 
 .mensagem {
   background: #ffe600;
-  width: auto;
+  width: 40%;
   height: 5%;
   padding: 0 8px;
-  margin-top: 8px;
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 7px;
   border:solid 0.2rem #838383;
   border-top: solid 0.2rem #212121;
