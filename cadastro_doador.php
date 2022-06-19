@@ -1,7 +1,7 @@
 <?php
 session_start(); //inicia sessão(); - guarda login do ususário neste computador
 include "cabecalho.php";
-include_once "conexao.php";
+
 $nome = "";
 $data_nascimento = "";
 $telefone = "";
@@ -18,8 +18,9 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   $telefone = filter_input(INPUT_POST, "telefone", FILTER_SANITIZE_STRING);
   $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
   $endereco = filter_input(INPUT_POST, "endereco", FILTER_SANITIZE_STRING);
-  $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_NUMBER_INT);
   $bairro = filter_input(INPUT_POST, "bairro", FILTER_SANITIZE_STRING);
+  $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_NUMBER_INT);
+
 
   if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro) {
     $mensagem = "Dados inválidos!";
@@ -32,10 +33,15 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
     $_SESSION['endereco'] = $endereco;
     $_SESSION['numero'] = $numero;
     $_SESSION['bairro'] = $bairro;
-    /* Obtem ultimo id cadastrado 
-    $conn->exec($result_usuario);
-    $id_atual = $conn->lastInsertId();
-    $_SESSION['lastID'] = $id_atual;
+
+    //print_r($_SESSION); Imprime dados salvos da sessão
+    $status = true;
+
+    header('Location: cadastro_doador2.php');
+    /*OBTEM O ULTIMO ID CADASTRADO 
+        $conn->exec($result_usuario);
+        $id_atual = $conn->lastInsertId();
+        $_SESSION['lastID'] = $id_atual;
     */
   }
 }
@@ -54,7 +60,7 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   </header>
 
   <main class="container">
-    <form method="POST" action="cadastro_doador2.php">
+    <form action="" method="POST">
       <h1>Cadastro de doador</h1>
       <label for="nome_completo">
         <span>Nome completo</span>
@@ -94,12 +100,6 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
-      <?php
-      if (isset($_SESSION['msg'])) {
-        echo $_SESSION['msg']; //imprime mensagem de sucesso ou erro
-        unset($_SESSION['msg']); //destroi variavel
-      }
-      ?>
     </form>
   </main>
 </body>
