@@ -11,7 +11,8 @@ if (isset($_POST["usuario"], $_POST["senha"])) {
   if (!$usuario || !$senha) {
     $mensagem = "<p style='margin:auto; color:#c93a3a'>Preencha todos os campos!<p>";
   } else {
-    $sql_code =  "SELECT * FROM funcionario WHERE usuario = '$usuario' AND senha = '$senha'";
+    $criptografada = md5($senha);
+    $sql_code =  "SELECT * FROM funcionario WHERE usuario = '$usuario' AND senha = '$criptografada'";
     $sql_query = $conexao->query($sql_code) or die("falha na execução do codigo sql: " . $conexao->error);
 
     $numero_linhas = $sql_query->num_rows;
@@ -65,7 +66,7 @@ if (isset($_POST["usuario"], $_POST["senha"])) {
           </a>
         </label>
         <div class="entrar">
-          <button class="btn-entrar" href="tela_inicial.html">
+          <button class="btn-entrar" href="#">
             <a style="color:#23232e; margin:auto">Entrar</a>
           </button>
         </div>
@@ -73,11 +74,11 @@ if (isset($_POST["usuario"], $_POST["senha"])) {
         echo $mensagem;
         ?>
         <div>
-          <a id="esqueceu_senha" href="">Esqueceu sua senha?</a>
+          <a id="esqueceu_senha" href="#">Esqueceu sua senha?</a>
         </div>
         <p>
           Não tem uma conta?
-          <a id="criar_conta" href="">Criar uma conta</a>
+          <a id="criar_conta" href="cadastro_funcionario.php">Criar uma conta</a>
         </p>
       </div>
     </form>

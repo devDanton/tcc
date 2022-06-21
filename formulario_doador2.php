@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "cabecalho.php";
+include_once "conexao.php";
 $camisa = "";
 $calca = "";
 $sapato = "";
@@ -20,13 +21,25 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
   if (!$camisa || !$calca || !$sapato || !$meia || !$cueca) {
     $mensagem = "Dados inválidos!";
   } else {
-    $_SESSION['camisa'] = $camisa;
-    $_SESSION['calca'] = $calca;
-    $_SESSION['sapato'] = $sapato;
-    $_SESSION['meia'] = $meia;
-    $_SESSION['cueca'] = $cueca;
+    $nome = $_SESSION['nome'];
+    $data_nascimento = $_SESSION['data_nascimento'];
+    $telefone = $_SESSION['telefone'];
+    $email = $_SESSION['email'];
+    $endereco = $_SESSION['endereco'];
+    $numero = $_SESSION['numero'];
+    $bairro = $_SESSION['bairro'];
     $status = true;
-    header('Location: cadastro_doador3.php');
+
+    $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro, tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro', '$camisa','$calca','$sapato','$meia', '$cueca')";
+    $resultado_usuario = mysqli_query($conexao, $result_usuario);
+
+    if (mysqli_insert_id($conexao)) {
+      $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
+      header('Location: index.php');
+    } else {
+      $_SESSION['msg'] = "<span style='color:red; display: flex; left:10px;'>Falha no envio</span>";
+      header('Location:formulario_doador2.php');
+    }
   }
 }
 ?>
@@ -37,7 +50,7 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
       <a class="logo" href="index.php">Make Good</a>
       <ul class="nav-list">
         <li>
-          <a href="cadastro_doador.php">Voltar</a>
+          <a href="formulario_doador.php">Voltar</a>
         </li>
       </ul>
     </nav>

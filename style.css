@@ -90,6 +90,14 @@ a.logo {
   padding: 0;
 }
 
+.list-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
 .list-campanha li {
   margin: auto;
 }
@@ -131,6 +139,21 @@ input {
   padding: 5px;
   margin: 10px;
   width: 80px;
+  height: 40px;
+  border-color: white;
+  background: #23232e;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-seja-doador {
+  padding: 5px;
+  margin: 10px;
+  width: auto;
   height: 40px;
   border-color: white;
   background: #23232e;

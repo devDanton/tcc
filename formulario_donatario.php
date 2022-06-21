@@ -37,7 +37,7 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
     //print_r($_SESSION); Imprime dados salvos da sessão
     $status = true;
 
-    header('Location: cadastro_doador2.php');
+    header('Location: formulario_donatario2.php');
     /*OBTEM O ULTIMO ID CADASTRADO 
         $conn->exec($result_usuario);
         $id_atual = $conn->lastInsertId();
@@ -61,7 +61,7 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
 
   <main class="container">
     <form action="" method="POST">
-      <h1>Cadastro de doador</h1>
+      <h1>Formulario de donatario</h1>
       <label for="nome_completo">
         <span>Nome completo</span>
         <input placeholder="" id="nome_completo" name="nome" type="text" class="validate" required />

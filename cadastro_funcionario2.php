@@ -16,12 +16,6 @@ $endereco = $_SESSION['endereco'];
 $numero = $_SESSION['numero'];
 $bairro = $_SESSION['bairro'];
 
-$camisa = $_SESSION['camisa'];
-$calca = $_SESSION['calca'];
-$sapato = $_SESSION['sapato'];
-$meia = $_SESSION['meia'];
-$cueca  = $_SESSION['cueca'];
-
 //print_r($_SESSION); Imprime dados salvos da sessão
 
 
@@ -35,15 +29,15 @@ if (isset($_POST["usuario"], $_POST["senha"], $_POST["senha_repetida"])) {
 
   if ($senha == $senha_repetida) {
     $criptografada = md5($senha);
-    $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, usuario, senha, bairro, tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$usuario', '$criptografada', '$bairro', '$camisa','$calca','$sapato','$meia', '$cueca')";
+    $result_usuario = "INSERT INTO funcionario (nome, data_nascimento, telefone, email, endereco, bairro, numero, usuario, senha ) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$bairro', '$numero', '$usuario', '$criptografada')";
     $resultado_usuario = mysqli_query($conexao, $result_usuario);
 
     if (mysqli_insert_id($conexao)) {
       //$_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
-      header('Location: login_doador.php');
+      header('Location: login_funcionario.php');
     } else {
       $_SESSION['msg'] = "<span style='color:red; display: flex; left:10px;'>Falha no envio</span>";
-      header('Location: cadastro_doador3.php');
+      header('Location: login_funcionario2.php');
     }
   } else {
     $_SESSION['mensagem'] = "<span style='color:red;'>As senhas não correspondem</span>";
@@ -58,7 +52,7 @@ if (isset($_POST["usuario"], $_POST["senha"], $_POST["senha_repetida"])) {
       <a class="logo" href="index.php">Make Good</a>
       <ul class="nav-list">
         <li>
-          <a href="cadastro_doador.php">Voltar</a>
+          <a href="cadastro_funcionario.php">Voltar</a>
         </li>
       </ul>
     </nav>
