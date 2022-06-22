@@ -61,7 +61,7 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
 
   <main class="container">
     <form action="" method="POST">
-      <h1>Formulario de donatario</h1>
+      <h1>Formulario de donatário</h1>
       <label for="nome_completo">
         <span>Nome completo</span>
         <input placeholder="" id="nome_completo" name="nome" type="text" class="validate" required />
