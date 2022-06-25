@@ -4,5 +4,5 @@ if (!isset($_SESSION)) {
 }
 
 if (!isset($_SESSION['id'])) {
-  die("<div class=mensagem>Você não tem permissão para acessar esta página, porque não está logado</div><buttom class= \"btn-enviar\"</button> <a href=\"login_funcionario.php\">Entrar</a></button>");
+  die("<div class=mensagem>Você não tem permissão para acessar esta página, porque não está logado</div><buttom class= \"btn-enviar\" style ='margin:auto; margin-top:0.5%'</button> <a href=\"login_funcionario.php\">Entrar</a></button>");
 }

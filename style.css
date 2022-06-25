@@ -181,7 +181,7 @@ span#enviar {
 .label span {
   font-size: 1.76rem;
 }
-.label select {
+.browser-default {
   background: #23232e;
   width: 280px;
   height: 35px;
@@ -459,8 +459,31 @@ label select#tamanho-item {
   border-left: solid 0.2rem #212121;
   color: #23232e;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 1.7rem;
   font-weight: bold;
+}
+.select-checkbox {
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+  justify-content: space-evenly;
+}
+
+
+.multiple-size {
+  background: #23232e;
+  margin-top: 5px;
+  border-radius: 7px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+} 
+#checkbox {
+width: auto;
+}
+.lb{
+  width: 15%;
 }
