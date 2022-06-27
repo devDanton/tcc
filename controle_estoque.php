@@ -8,8 +8,6 @@ if (!isset($_SESSION)) {
 
 $sql = "SELECT * FROM item ORDER BY id ASC";
 $result_sql = mysqli_query($conexao, $sql);
-
-print_r($result_sql);
 ?>
 
 <body>
@@ -24,10 +22,6 @@ print_r($result_sql);
     </nav>
   </header>
   <form method="POST" action="">
-    <a class="pesquisar-item" href="">
-      <p>Pesquisar item</p>
-    </a>
-
     <table class="table">
       <thread>
         <tr class="primeira-linha">
@@ -60,66 +54,11 @@ print_r($result_sql);
       </tbody>
     </table>
 
-    <button class="btn-enviar" type="submit">
+    <!-- <button class="btn-enviar" type="submit">
       <a id="enviar">Avançar</a>
-    </button>
+    </button> -->
 
   </form>
-  <!-- <label for="">
-      <span>Tipo item</span>
-      <select name="id_categoria" id="id_categoria">
-        <option value="">Escolha o tipo de item</option>
-      </select>
-    </label>
-    <label>
-      <span>Tamanho</span>
-      <span class="carregando">Aguarde, carregando...</span>
-      <select name="id_sub_categoria" id="id_sub_categoria">
-        <option value="">Escolha o tamanho do item</option>
-      </select>
-    </label>
-
-    <div class="entrada-saida">
-      <label class="label-select" for="">
-        <span>Entrada</span>
-        <input placeholder="" type="number" name="quantidade-entrada" id="quantidade-entrada" class="validate" />
-      </label>
-
-      <label for="">
-        <span>Saída</span>
-        <input placeholder="" type="number" name="quantidade-saida" id="quantidade-saida" class="validate" />
-      </label>
-    </div> -->
-
-  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    google.load("jquery", "1.4.2");
-  </script>
-
-  <script type="text/javascript">
-    $(function() {
-      $('#id_categoria').change(function() {
-        if ($(this).val()) {
-          $('#id_sub_categoria').hide();
-          $('.carregando').show();
-          $.getJSON('sub_categorias_post.php?search=', {
-            id_categoria: $(this).val(),
-            ajax: 'true'
-          }, function(j) {
-            var options = '<option value="">Escolha Subcategoria</option>';
-            for (var i = 0; i < j.length; i++) {
-              options += '<option value="' + j[i].id + '">' + j[i].tamanho_item + '</option>';
-            }
-            $('#id_sub_categoria').html(options).show();
-            $('.carregando').hide();
-          });
-        } else {
-          $('#id_sub_categoria').html('<option value="">– Escolha Subcategoria –</option>');
-        }
-      });
-    });
-  </script> -->
-
 </body>
 
 </html>

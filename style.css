@@ -348,6 +348,8 @@ table {
   width: 50vw;
   border-collapse: collapse;
   text-align: center;
+  margin-top: 10px;
+  margin-block-end: 10px;
   
 }
 tr.primeira-linha{
@@ -536,7 +538,8 @@ width: 300px;
   font-size: 1.7rem;
   right: 25px;
   font-weight: 400;
-  padding: 5px;
+  padding: 10px;
+ 
 }
 
 .table td {
@@ -544,6 +547,7 @@ width: 300px;
   font-size: 1.5rem;
   right: 25px;
   font-weight: 400;
+  padding: 10px;
 }
 
 svg.bi.bi-pencil-square {

@@ -141,7 +141,7 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
       </div>
 
       <div class="label">
-        <span>Cueca</span>
+        <span>Calcinha / Cueca</span>
         <label class="label_select">
           <select class="browser-default" name="cueca" required>
             <option value="" disabled selected>Nenhum</option>
