@@ -355,8 +355,8 @@ tr.primeira-linha{
   color: white;
 }
 td {
-  border: solid 1px #23232e;
-  font-size: 2rem;
+  border: solid 0.5px #23232e;
+  font-size: 1.2rem;
 }
 .familiar-cadastrado {
   border: solid 2px #23232e;
@@ -528,4 +528,29 @@ width: 300px;
 .carregando {
   color: #ff0000;
   display: none;
+}
+
+.table th {
+  background-color: #23232e;
+  color: white;
+  font-size: 1.7rem;
+  right: 25px;
+  font-weight: 400;
+  padding: 5px;
+}
+
+.table td {
+  color: #23232e;
+  font-size: 1.5rem;
+  right: 25px;
+  font-weight: 400;
+}
+
+svg.bi.bi-pencil-square {
+  color: #ffffff;
+  border-radius: 7px;
+  background: #4c4cff;
+  padding: 1.5px;
+  width: 18px;
+  height: 18px;
 }
