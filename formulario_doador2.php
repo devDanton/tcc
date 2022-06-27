@@ -28,9 +28,10 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
     $endereco = $_SESSION['endereco'];
     $numero = $_SESSION['numero'];
     $bairro = $_SESSION['bairro'];
+    $genero = $_SESSION['genero'];
     $status = true;
 
-    $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro, tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro', '$camisa','$calca','$sapato','$meia', '$cueca')";
+    $result_usuario = "INSERT INTO doador (nome, data_nascimento, telefone, email, endereco, numero, bairro, genero, tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro', '$genero', '$camisa','$calca','$sapato','$meia', '$cueca')";
     $resultado_usuario = mysqli_query($conexao, $result_usuario);
 
     if (mysqli_insert_id($conexao)) {
@@ -64,6 +65,7 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
         <label class="label_select">
           <select class="browser-default" name="camisa" required>
             <option value="" disabled selected>Nenhum</option>
+            <option value="PP">PP</option>
             <option value="P">P</option>
             <option value="M">M</option>
             <option value="G">G</option>
@@ -130,10 +132,11 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
       </div>
 
       <div class="label">
-        <span>Cueca</span>
+        <span>Cueca / Calcinha</span>
         <label class="label_select">
           <select class="browser-default" name="cueca" required>
             <option value="" disabled selected>Nenhum</option>
+            <option value="PP">PP</option>
             <option value="P">P</option>
             <option value="M">M</option>
             <option value="G">G</option>

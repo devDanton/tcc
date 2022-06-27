@@ -1,5 +1,10 @@
-<?php include "cabecalho.php"
-
+<?php include "cabecalho.php";
+include_once "conexao.php";
+$script_sql = "Select MAX(id) FROM campanha";
+$sql = mysqli_query($conexao, $script_sql);
+$ultima_insercao = mysqli_fetch_array($sql);
+$script_sql = "SELECT * FROM campanha WHERE id = '$ultima_insercao[0]'";
+$sql = mysqli_query($conexao, $script_sql);
 ?>
 
 <body>
@@ -55,7 +60,36 @@
           </button>
         </li>
       </ul>
+
+      <?php
+      $ultima_campanha = mysqli_fetch_assoc($sql);
+      echo "<h1>" . $ultima_campanha['nome_campanha'] . "</h1>";
+      ?>
+      <p style="display: flex; justify-content: center;">Lista de itens requisitados</p>
+
     </div>
+    <table>
+      <thread>
+        <tr class="primeira-linha"></tr>
+        <th>Camisa</th>
+        <th>Calça</th>
+        <th>Sapato</th>
+        <th>Meia</th>
+        <th>Cueca</th>
+      </thread>
+      <tbody>
+        <?php
+        //while ($ultima_campanha = mysqli_fetch_assoc($sql)) {
+        echo "<tr></tr>";
+        echo "<td>" . $ultima_campanha['camisa'] . "</td>";
+        echo "<td>" . $ultima_campanha['calca'] . "</td>";
+        echo "<td>" . $ultima_campanha['sapato'] . "</td>";
+        echo "<td>" . $ultima_campanha['meia'] . "</td>";
+        echo "<td>" . $ultima_campanha['cueca'] . "</td>";
+        //}
+        ?>
+      </tbody>
+    </table>
   </main>
 </body>
 

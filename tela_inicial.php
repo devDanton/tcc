@@ -1,6 +1,6 @@
 <?php
 include_once "cabecalho.php";
-include "protecao.php";
+include_once "protecao.php";
 ?>
 
 <body>

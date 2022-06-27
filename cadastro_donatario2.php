@@ -2,6 +2,16 @@
 session_start();
 include "cabecalho.php";
 include_once "conexao.php";
+include_once "protecao.php";
+$nome = "";
+$data_nascimento = "";
+$telefone = "";
+$email = "";
+$endereco = "";
+$numero = "";
+$bairro = "";
+$genero = "";
+
 $camisa = "";
 $calca = "";
 $sapato = "";
@@ -18,7 +28,7 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
   $meia = filter_input(INPUT_POST, "meia");
   $cueca = filter_input(INPUT_POST, "cueca");
 
-  if (!$camisa || !$calca || !$sapato || !$meia || !$cueca) {
+  if (!$camisa || !$calca || !$sapato || !$meia || !$cueca || $genero) {
     $mensagem = "Dados inválidos!";
   } else {
     $nome = $_SESSION['nome'];
@@ -28,9 +38,10 @@ if (isset($_POST["camisa"], $_POST["calca"], $_POST["sapato"], $_POST["meia"], $
     $endereco = $_SESSION['endereco'];
     $numero = $_SESSION['numero'];
     $bairro = $_SESSION['bairro'];
+    $genero = $_SESSION['genero'];
     $status = true;
 
-    $result_usuario = "INSERT INTO donatario (nome, data_nascimento, telefone, email, endereco, numero, bairro, tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero', '$bairro', '$camisa','$calca','$sapato','$meia', '$cueca')";
+    $result_usuario = "INSERT INTO donatario (nome, data_nascimento, telefone, email, endereco, numero, bairro, genero, tamanho_camisa, tamanho_calca, tamanho_sapato, tamanho_meia, tamanho_cueca) VALUES ('$nome', '$data_nascimento', '$telefone', '$email', '$endereco', '$numero',  '$bairro', '$genero', '$camisa','$calca','$sapato','$meia', '$cueca')";
     $resultado_usuario = mysqli_query($conexao, $result_usuario);
 
     if (mysqli_insert_id($conexao)) {

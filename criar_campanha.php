@@ -1,38 +1,57 @@
-<?php include "cabecalho.php";
-include "cabecalho.php";
+<?php
+include_once "cabecalho.php";
 include_once "conexao.php";
+include_once "protecao.php";
 
 if (!isset($_SESSION)) {
   session_start();
 }
-
-$camisa = "";
-$calca = "";
-$sapato = "";
-$meia = "";
-$cueca = "";
-
-if (isset($_POST["ckCamisa"], $_POST["ckCalca"], $_POST["ckSapato"], $_POST["ckMeia"], $_POST["ckCueca"])) {
-  $camisa = $_POST['ckCamisa'];
-  $calca = $_POST['ckCalca'];
-  $sapato = $_POST['ckSapato'];
-  $meia = $_POST['ckMeia'];
-  $cueca = $_POST['ckCueca'];
+$nome_campanha = null;
+$camisa_P = null;
+$calca_P = null;
+$sapato_P = null;
+$meia_P = null;
+$cueca_P = null;
+$mensagem = "";
+if (isset($_POST["nome_campanha"], $_POST["ckCamisa"], $_POST["ckCalca"], $_POST["ckSapato"], $_POST["ckMeia"], $_POST["ckCueca"])) {
+  $nome_campanha = $_POST["nome_campanha"];
+  $camisa_P = $_POST['ckCamisa'];
+  $calca_P = $_POST['ckCalca'];
+  $sapato_P = $_POST['ckSapato'];
+  $meia_P = $_POST['ckMeia'];
+  $cueca_P = $_POST['ckCueca'];
 }
-if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "") {
-  for ($i = 0; $i < count($camisa); $i++) {
-    echo "<p>{$camisa[$i]}</p>";
-    echo "<p>{$calca[$i]}</p>";
-    echo "<p>{$sapato[$i]}</p>";
-    echo "<p>{$meia[$i]}</p>";
-    echo "<p>{$cueca[$i]}</p>";
-    $_SESSION['msg'] = "<p>Enviado com sucesso</p>";
-    header('Location:criar_campanha2.php');
+if ($nome_campanha != null || $camisa_P != null || $calca_P != null || $sapato_P != null || $meia_P != null || $cueca_P != null) {
+
+  $camisa = implode(", ", $camisa_P);
+  $calca = implode(", ", $calca_P);
+  $sapato = implode(", ", $sapato_P);
+  $meia = implode(", ", $meia_P);
+  $cueca = implode(", ", $cueca_P);
+
+  /*
+  echo $camisa;
+  echo $calca;
+  echo $sapato;
+  echo $meia;
+  echo $cueca;
+  */
+
+  $result_usuario = "INSERT INTO campanha (nome_campanha, camisa, calca, sapato, meia, cueca) VALUES ('$nome_campanha', '$camisa', '$calca', '$sapato', '$meia', '$cueca')";
+  $resultado_usuario = mysqli_query($conexao, $result_usuario);
+
+  if (mysqli_insert_id($conexao)) {
+    $_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
+    header('Location: criar_campanha2.php');
+  } else {
+    $_SESSION['msg'] = "<span style='color:red; display: flex; left:10px;'>Falha no envio</span>";
+    header('Location:criar_campanha.php');
   }
+  $mensagem = $_SESSION['msg'];
+  unset($_SESSION['msg']);
 } else {
-  $_SESSION['msg'] = "<p>Faltou algum dado</p>";
+  $mensagem = "<span style='color:red; display: flex; margin: 10px  ;'>Selecione pelo menos um tamanho de cada tipo de roupa</span>";
 }
-
 ?>
 
 <body>
@@ -58,17 +77,23 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
       <div class="select-checkbox">
         <div class="lb">
           <span>Camisa</span>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckCamisa[]" id="checkbox" value="PP">
+            <span>PP</span>
+          </label>
+
           <label class="multiple-size">
             <input type="checkbox" name="ckCamisa[]" id="checkbox" value="P">
             <span>P</span>
           </label>
-          <label class="multiple-size">
 
+          <label class="multiple-size">
             <input type="checkbox" name="ckCamisa[]" id="checkbox" value="M">
             <span>M</span>
           </label>
-          <label class="multiple-size">
 
+          <label class="multiple-size">
             <input type="checkbox" name="ckCamisa[]" id="checkbox" value="G">
             <span>G</span>
           </label>
@@ -77,7 +102,6 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
             <input type="checkbox" name="ckCamisa[]" id="checkbox" value="GG">
             <span>GG</span>
           </label>
-
           <label class="multiple-size">
             <input type="checkbox" name="ckCamisa[]" id="checkbox" value="EGG">
             <span>EGG</span>
@@ -134,11 +158,6 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
           </label>
 
           <label class="multiple-size">
-            <input type="checkbox" name="ckCalca[]" value="52" id="checkbox">
-            <span>52</span>
-          </label>
-
-          <label class="multiple-size">
             <input type="checkbox" name="ckCalca[]" value="54" id="checkbox">
             <span>54</span>
           </label>
@@ -146,6 +165,11 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
           <label class="multiple-size">
             <input type="checkbox" name="ckCalca[]" value="56" id="checkbox">
             <span>56</span>
+          </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckCalca[]" value="58" id="checkbox">
+            <span>58</span>
           </label>
         </div>
         <div class="lb">
@@ -169,6 +193,11 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
 
           <label class="multiple-size">
             <input type="checkbox" name="ckSapato[]" value="39" id="checkbox">
+            <span>39</span>
+          </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckSapato[]" value="40" id="checkbox">
             <span>40</span>
           </label>
 
@@ -191,6 +220,21 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
             <input type="checkbox" name="ckSapato[]" value="44" id="checkbox">
             <span>44</span>
           </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckSapato[]" value="45" id="checkbox">
+            <span>45</span>
+          </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckSapato[]" value="46" id="checkbox">
+            <span>46</span>
+          </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckSapato[]" value="47" id="checkbox">
+            <span>47</span>
+          </label>
         </div>
 
         <div class="lb">
@@ -208,6 +252,11 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
           <label class="multiple-size">
             <input type="checkbox" name="ckMeia[]" value="G" id="checkbox">
             <span>G</span>
+          </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckMeia[]" value="G" id="checkbox">
+            <span>GG</span>
           </label>
 
         </div>
@@ -228,14 +277,20 @@ if ($camisa != "" || $calca != "" || $sapato != "" || $meia != "" || $cueca != "
             <input type="checkbox" name="ckCueca[]" value="G" id="checkbox">
             <span>G</span>
           </label>
+
           <label class="multiple-size">
             <input type="checkbox" name="ckCueca[]" value="GG" id="checkbox">
             <span>GG</span>
           </label>
+
+          <label class="multiple-size">
+            <input type="checkbox" name="ckCueca[]" value="GG" id="checkbox">
+            <span>EGG</span>
+          </label>
         </div>
       </div>
       <?php
-      echo $_SESSION['msg'];
+      echo $mensagem;
       ?>
       <button class="btn-enviar" type="submit">
         <a id="enviar">Avançar</a>

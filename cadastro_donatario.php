@@ -1,7 +1,7 @@
 <?php
 session_start(); //inicia sessão(); - guarda login do ususário neste computador
 include "cabecalho.php";
-
+include_once "protecao.php";
 $nome = "";
 $data_nascimento = "";
 $telefone = "";
@@ -11,7 +11,7 @@ $numero = "";
 $bairro = "";
 $status = false;
 
-if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"])) {
+if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"], $_POST["genero"])) {
   //filtrando inputs para remover caracteres que não correspondem ao padrão
   $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_STRING);
   $data_nascimento = filter_input(INPUT_POST, "data_nascimento");
@@ -20,9 +20,10 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   $endereco = filter_input(INPUT_POST, "endereco", FILTER_SANITIZE_STRING);
   $bairro = filter_input(INPUT_POST, "bairro", FILTER_SANITIZE_STRING);
   $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_NUMBER_INT);
+  $genero = filter_input(INPUT_POST, "genero", FILTER_SANITIZE_STRING);
 
 
-  if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro) {
+  if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro || !$genero) {
     $mensagem = "Dados inválidos!";
   } else {
     /*statement*/
@@ -33,6 +34,7 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
     $_SESSION['endereco'] = $endereco;
     $_SESSION['numero'] = $numero;
     $_SESSION['bairro'] = $bairro;
+    $_SESSION['genero'] = $genero;
 
     //print_r($_SESSION); Imprime dados salvos da sessão
     $status = true;
@@ -95,6 +97,15 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       <label for="bairro">
         <span>Bairro</span>
         <input id="bairro" type="text" name="bairro" class="validate" required />
+      </label>
+
+      <label class="genero" for="genero">
+        <span>Genero</span>
+        <select class="browser-default" name="genero" required>
+          <option value="M">Masculino</option>
+          <option value="F">Feminino</option>
+          <option value="NB">Não binário</option>
+        </select>
       </label>
 
       <button class="btn-enviar" type="submit">

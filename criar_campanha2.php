@@ -1,4 +1,16 @@
-<?php include "cabecalho.php" ?>
+<?php
+include_once "cabecalho.php";
+include_once "conexao.php";
+include_once "protecao.php";
+
+
+$script_sql = "Select MAX(id) FROM campanha";
+$sql = mysqli_query($conexao, $script_sql);
+$ultima_insercao = mysqli_fetch_array($sql);
+$script_sql = "SELECT * FROM campanha WHERE id = '$ultima_insercao[0]'";
+$sql = mysqli_query($conexao, $script_sql);
+//print_r($sql);
+?>
 
 <body>
   <header>
@@ -6,7 +18,7 @@
       <a class="logo" href="tela_inicial.php">Make Good</a>
       <ul class="nav-list">
         <li>
-          <a href="cadastro_donatario.php">Voltar</a>
+          <a href="criar_campanha.php">Voltar</a>
         </li>
       </ul>
     </nav>
@@ -14,61 +26,35 @@
 
   <main class="container">
     <form>
-      <h1>Criar campanha</h1>
-      <h2>Lista de itens requisitados</h2>
+      <?php
+      $ultima_campanha = mysqli_fetch_assoc($sql);
+      echo "<h1>" . $ultima_campanha['nome_campanha'] . "</h1>";
+      ?>
+      <p>Lista de itens requisitados na última campanha</p>
       <table>
-        <tr class="primeira-linha">
-          <td>Camisa</td>
-          <td>Calça</td>
-          <td>Sapato</td>
-          <td>Meia</td>
-          <td>Cueca</td>
-        </tr>
-        <tr>
-          <td>P</td>
-          <td>34-36</td>
-          <td>33-34</td>
-          <td>P</td>
-          <td>PP</td>
-        </tr>
-        <tr>
-          <td>M</td>
-          <td>38-40</td>
-          <td>34-35</td>
-          <td>PP</td>
-          <td>P</td>
-        </tr>
-        <tr>
-          <td>G</td>
-          <td>40-42</td>
-          <td>34-36</td>
-          <td>M</td>
-          <td>M</td>
-        </tr>
-        <tr>
-          <td>EG</td>
-          <td>42-48</td>
-          <td>37-38</td>
-          <td>G</td>
-          <td>G</td>
-        </tr>
-        <tr>
-          <td>EG</td>
-          <td>50-54</td>
-          <td>40-42</td>
-          <td>EG</td>
-          <td>GG</td>
-        </tr>
-        <tr>
-          <td>GG</td>
-          <td>56-58</td>
-          <td>42-44</td>
-          <td>GG</td>
-          <td>EG</td>
-        </tr>
+        <thread>
+          <tr class="primeira-linha"></tr>
+          <th>Camisa</th>
+          <th>Calça</th>
+          <th>Sapato</th>
+          <th>Meia</th>
+          <th>Cueca</th>
+        </thread>
+        <tbody>
+          <?php
+          //while ($ultima_campanha = mysqli_fetch_assoc($sql)) {
+          echo "<tr></tr>";
+          echo "<td>" . $ultima_campanha['camisa'] . "</td>";
+          echo "<td>" . $ultima_campanha['calca'] . "</td>";
+          echo "<td>" . $ultima_campanha['sapato'] . "</td>";
+          echo "<td>" . $ultima_campanha['meia'] . "</td>";
+          echo "<td>" . $ultima_campanha['cueca'] . "</td>";
+          //}
+          ?>
+        </tbody>
       </table>
       <a class="btn-enviar" href="tela_inicial.php">
-        <span id="enviar">Publicar</span>
+        <span id="enviar">Tela inicial</span>
       </a>
     </form>
   </main>
