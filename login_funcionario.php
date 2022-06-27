@@ -52,19 +52,19 @@ if (isset($_POST["usuario"], $_POST["senha"])) {
           <span>Senha</span>
           <input name="senha" placeholder="" id="senha_login" type="password" class="validate" />
         </label>
-        <label class="label_facebook" for="">
+        <!-- <label class="label_facebook" for="">
           <a class="facebook" href="#">
             <img src="icons/facebook.svg" alt="Facebook" />
             <p id="span1">Entre com o Facebook</p>
           </a>
-        </label>
+        </label> -->
 
-        <label class="label_google" for="">
+        <!-- <label class="label_google" for="">
           <a class="google" href="#">
             <img src="icons/google.svg" alt="Google" />
             <p id="span2">Entre com o Google</p>
           </a>
-        </label>
+        </label> -->
         <div class="entrar">
           <button class="btn-entrar" href="#">
             <a style="color:#23232e; margin:auto">Entrar</a>

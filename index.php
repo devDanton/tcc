@@ -56,7 +56,7 @@ $sql = mysqli_query($conexao, $script_sql);
         </li>
 
         <li><button class="btn-seja-doador">
-            <a href="formulario_donatario.php">Cadastro de necessitados</a>
+            <a href="formulario_donatario.php">Cadastro de pessoa carente</a>
           </button>
         </li>
       </ul>
