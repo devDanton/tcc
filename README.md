@@ -163,6 +163,7 @@ Figura 19 - Criar campanha.
 ### 4.8.1. Visualizar Campanha.
 
 Após o funcionário inserir todos os dados da campanha e clicar em enviar o mesmo é direcionado para esta tela que o possibilita visualizar a campanha que acabou de cadastrar e voltar a tela inicial através do botão “Tela inicial”.
+
 Figura 20 - Visualizar campanha
 
 ### 4.9. Controle de Estoque.
@@ -174,6 +175,7 @@ Figura 21 - Controle de estoque.
 ### 4.9.1. Painel de gerenciamento de peças de roupa.
 
 Após o funcionário clicar no pincel para editar o dado, o mesmo é direcionado para esta tela que o possibilita efetuar entrada e saída no respectivo item selecionado.
+
 Figura 22 - Controle de estoque.
 
 ## 5. Testes finais.
