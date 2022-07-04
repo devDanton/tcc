@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 $html = "";
-$result_donatario = "SELECT * FROM donatario";
+$result_donatario = "SELECT * FROM doador";
 $resultado_donatario = mysqli_query($conexao, $result_donatario);
 
 ?>
@@ -46,22 +46,22 @@ $resultado_donatario = mysqli_query($conexao, $result_donatario);
   $html .= "<tbody>";
   ?>
         <?php
-        while ($row_donatario = mysqli_fetch_assoc($resultado_donatario)) {
+        while ($row_doador = mysqli_fetch_assoc($resultado_donatario)) {
           $html .= "<tr>";
-          $html .= "<td>" . $row_donatario['id'] . "</td>";
-          $html .= "<td>" . $row_donatario['nome'] . "</td>";
-          $html .= "<td>" . $row_donatario['data_nascimento'] . "</td>";
-          $html .= "<td>" . $row_donatario['telefone'] . "</td>";
-          $html .= "<td>" . $row_donatario['email'] . "</td>";
-          $html .= "<td>" . $row_donatario['endereco'] . "</td>";
-          $html .= "<td>" . $row_donatario['bairro'] . "</td>";
-          $html .= "<td>" . $row_donatario['numero'] . "</td>";
-          $html .= "<td>" . $row_donatario['genero'] . "</td>";
-          $html .= "<td>" . $row_donatario['tamanho_camisa'] . "</td>";
-          $html .= "<td>" . $row_donatario['tamanho_calca'] . "</td>";
-          $html .= "<td>" . $row_donatario['tamanho_sapato'] . "</td>";
-          $html .= "<td>" . $row_donatario['tamanho_meia'] . "</td>";
-          $html .= "<td>" . $row_donatario['tamanho_cueca'] . "</td>";
+          $html .= "<td>" . $row_doador['id'] . "</td>";
+          $html .= "<td>" . $row_doador['nome'] . "</td>";
+          $html .= "<td>" . $row_doador['data_nascimento'] . "</td>";
+          $html .= "<td>" . $row_doador['telefone'] . "</td>";
+          $html .= "<td>" . $row_doador['email'] . "</td>";
+          $html .= "<td>" . $row_doador['endereco'] . "</td>";
+          $html .= "<td>" . $row_doador['bairro'] . "</td>";
+          $html .= "<td>" . $row_doador['numero'] . "</td>";
+          $html .= "<td>" . $row_doador['genero'] . "</td>";
+          $html .= "<td>" . $row_doador['tamanho_camisa'] . "</td>";
+          $html .= "<td>" . $row_doador['tamanho_calca'] . "</td>";
+          $html .= "<td>" . $row_doador['tamanho_sapato'] . "</td>";
+          $html .= "<td>" . $row_doador['tamanho_meia'] . "</td>";
+          $html .= "<td>" . $row_doador['tamanho_cueca'] . "</td>";
           $html .= "</tr>";
 
         }

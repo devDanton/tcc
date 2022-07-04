@@ -13,7 +13,6 @@ $sql = mysqli_query($conexao, $script_sql);
       <a class="logo" href="index.php">Make Good</a>
       <ul class="nav-list">
         <li>
-          <a href="">Voltar</a>
         </li>
         <li>
           <a href="cadastro_funcionario.php" class="btn_criar_conta">Criar conta</a>
@@ -55,7 +54,8 @@ $sql = mysqli_query($conexao, $script_sql);
           </button>
         </li>
 
-        <li><button class="btn-seja-doador">
+        <li>
+          <button class="btn-seja-doador">
             <a href="formulario_donatario.php">Cadastro de pessoa carente</a>
           </button>
         </li>

@@ -20,36 +20,33 @@ include_once "protecao.php";
       <ul class="list-funcoes">
         <li id="li-funcoes">
           <a href="relatorio_donatarios.php">
-            <!-- <img class="li-img" src="icons/icon_cadastro_donatario.svg" /> -->
-            <h2>Relatório donatários cadastrados</h2>
-            <span id="spanHome">Disponibiliza uma lista em arquivo .pdf de todos os donatários cadastrados.</span>
+            <img class="li-img" src="icons/icon_cadastro_donatario.svg" />
+            <h2>Consultar donatários cad.</h2>
+            <span id="spanHome">Disponibiliza uma lista de todos os donatários cadastrados e possibilita gerar relatório.</span>
           </a>
         </li>
 
         <li id="li-funcoes">
-          <a href="criar_campanha.php">
-            <img class="li-img" src="icons/icon_criar_campanhasvg.svg" />
-            <h2>Criar campanha</h2>
-            <span id="spanHome">Cadastramento de campanhas com o objetivo de arrecadar itens
-              requisitados.
-            </span>
+          <a href="relatorio_doadores.php">
+            <img class="li-img" src="icons/icon_cons_doad.svg" />
+            <h2>Consultar doadores cad.</h2>
+            <span id="spanHome">Disponibiliza uma lista de todos os donadores cadastrados e possibilita gerar relatório.</span>
           </a>
         </li>
 
         <li id="li-funcoes">
-          <a href="controle_estoque.php">
+          <a href="relatorio_estoque.php">
             <img class="li-img" src="icons/icon_controle_estoque.svg" />
-            <h2>Controle de estoque</h2>
-            <span id="spanHome">Cadastramento dos itens recebidos através das doações.</span>
+            <h2>Consultar estoque</h2>
+            <span id="spanHome">Disponibiliza informações do estoque e possibilita gerar relatório.</span>
           </a>
         </li>
 
         <li id="li-funcoes">
-          <a href="emitir_relatorio.php">
-            <img class="li-img" src="icons/icon_emitir_relatorio.svg" />
-            <h2>Emitir relatório</h2>
-            <span id="spanHome">Emissão de relatórios dos itens requisitados e de pessoas que
-              necessitem de doação.</span>
+          <a href="relatorio_campanhas.php">
+            <img class="li-img" src="icons/icon_criar_campanhasvg.svg" />
+            <h2>Consultar campanhas</h2>
+            <span id="spanHome">Disponibiliza uma lista de todas as campanhas cadastrados e possibilita gerar relatório.</span>
           </a>
         </li>
       </ul>
