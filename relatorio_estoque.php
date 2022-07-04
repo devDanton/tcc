@@ -17,7 +17,7 @@ $result_sql = mysqli_query($conexao, $sql);
       <a class="logo" href="tela_inicial.php">Make Good</a>
       <ul class="nav-list">
         <li>
-          <a href="tela_inicial.php">Voltar</a>
+          <a href="emitir_relatorio.php">Voltar</a>
         </li>
       </ul>
     </nav>
