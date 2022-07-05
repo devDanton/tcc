@@ -23,6 +23,7 @@ $resultado_donatario = mysqli_query($conexao, $result_donatario);
     </nav>
   </header>
   <form method="POST" action="dompdf.php">
+    <h1>Lista de doadores cadastrados</h1>
   <?php
   $html .=  "<table class='table'>";
   //$html .= "<thread>";
