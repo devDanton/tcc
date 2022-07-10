@@ -1,6 +1,7 @@
 <?php
 session_start(); //inicia sessão(); - guarda login do ususário neste computador
 include "cabecalho.php";
+include "conexao.php";
 
 $nome = "";
 $data_nascimento = "";
@@ -11,6 +12,7 @@ $numero = "";
 $bairro = "";
 $genero = "";
 $status = false;
+$mensagem = "";
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"], $_POST["genero"])) {
   //filtrando inputs para remover caracteres que não correspondem ao padrão
@@ -22,31 +24,39 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   $bairro = filter_input(INPUT_POST, "bairro", FILTER_SANITIZE_STRING);
   $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_NUMBER_INT);
   $genero = filter_input(INPUT_POST, "genero", FILTER_SANITIZE_STRING);
+  
+    //Busca no banco de dados se o e-mail digitado já foi cadastrado
+    $sql_code =  "SELECT email FROM donatario WHERE email = '$email'";
+    $result_sql_code = mysqli_query($conexao, $sql_code);
+    $row_donatario = mysqli_fetch_assoc($result_sql_code);
+    
+     if ($row_donatario['email'] == $email ) {
+       $mensagem = "<p style='margin:auto; color:red; font-weight: bold;' >E-mail já cadastrado!<p>";
+     } else {
+   if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro || !$genero) {
+     $mensagem = "Dados inválidos!";
+   } else {
+     /*statement*/
+     $_SESSION['nome'] = $nome;
+     $_SESSION['data_nascimento'] = $data_nascimento;
+     $_SESSION['telefone'] = $telefone;
+     $_SESSION['email'] = $email;
+     $_SESSION['endereco'] = $endereco;
+     $_SESSION['numero'] = $numero;
+     $_SESSION['bairro'] = $bairro;
+     $_SESSION['genero'] = $genero;
 
+     print_r($_SESSION); //Imprime dados salvos da sessão
+     $status = true;
 
-  if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro || !$genero) {
-    $mensagem = "Dados inválidos!";
-  } else {
-    /*statement*/
-    $_SESSION['nome'] = $nome;
-    $_SESSION['data_nascimento'] = $data_nascimento;
-    $_SESSION['telefone'] = $telefone;
-    $_SESSION['email'] = $email;
-    $_SESSION['endereco'] = $endereco;
-    $_SESSION['numero'] = $numero;
-    $_SESSION['bairro'] = $bairro;
-    $_SESSION['genero'] = $genero;
-
-    //print_r($_SESSION); Imprime dados salvos da sessão
-    $status = true;
-
-    header('Location: formulario_donatario2.php');
-    /*OBTEM O ULTIMO ID CADASTRADO 
-        $conn->exec($result_usuario);
-        $id_atual = $conn->lastInsertId();
-        $_SESSION['lastID'] = $id_atual;
-    */
-  }
+     header('Location: formulario_donatario2.php');
+     /*OBTEM O ULTIMO ID CADASTRADO 
+         $conn->exec($result_usuario);
+         $id_atual = $conn->lastInsertId();
+         $_SESSION['lastID'] = $id_atual;
+     */
+   }
+ }
 }
 ?>
 
@@ -112,6 +122,9 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
+        <?php
+        echo $mensagem;
+        ?>
     </form>
   </main>
 </body>

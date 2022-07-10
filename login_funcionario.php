@@ -9,7 +9,7 @@ if (isset($_POST["usuario"], $_POST["senha"])) {
   $senha = $conexao->real_escape_string($_POST['senha']);
 
   if (!$usuario || !$senha) {
-    $mensagem = "<p style='margin:auto; color:#c93a3a'>Preencha todos os campos!<p>";
+    $mensagem = "<p style='color:red; display: flex; font-weight: bold'>Preencha todos os campos!<p>";
   } else {
     $criptografada = md5($senha);
     $sql_code =  "SELECT * FROM funcionario WHERE usuario = '$usuario' AND senha = '$criptografada'";
@@ -31,7 +31,7 @@ if (isset($_POST["usuario"], $_POST["senha"])) {
 
       $mensagem = "<p style='margin:auto; color:green'>Usuario e senha corretos<p>";
     } else {
-      $mensagem =  "<p style='margin:auto; color:#c93a3a; display: flex; align-items'>Falha no login! Usuário ou senha incorretos<p>";
+      $mensagem =  "<p style='margin:auto; color:red; display: flex; align-items; font-weight: bold'>Falha no login! Usuário ou senha incorretos<p>";
     }
   }
 }

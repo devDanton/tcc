@@ -36,11 +36,11 @@ if (isset($_POST["usuario"], $_POST["senha"], $_POST["senha_repetida"])) {
       //$_SESSION['msg'] = "<p style='color:green;'>Enviado com sucesso!</p>";
       header('Location: login_funcionario.php');
     } else {
-      $_SESSION['msg'] = "<span style='color:red; display: flex; left:10px;'>Falha no envio</span>";
+      $_SESSION['msg'] = "<span style='color:red; display: flex; font-weight: bold'>Falha no envio</span>";
       header('Location: login_funcionario2.php');
     }
   } else {
-    $_SESSION['mensagem'] = "<span style='color:red;'>As senhas não correspondem</span>";
+    $_SESSION['mensagem'] = "<span style='color:red; display: flex; font-weight: bold'>As senhas não correspondem</span>";
     //echo $_SESSION['mensagem'];
   }
 }

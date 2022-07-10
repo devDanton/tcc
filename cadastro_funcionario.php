@@ -1,6 +1,7 @@
 <?php
 session_start(); //inicia sessão(); - guarda login do ususário neste computador
 include "cabecalho.php";
+include "conexao.php";
 
 $nome = "";
 $data_nascimento = "";
@@ -10,6 +11,7 @@ $endereco = "";
 $numero = "";
 $bairro = "";
 $status = false;
+$mensagem = "";
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"])) {
   //filtrando inputs para remover caracteres que não correspondem ao padrão
@@ -21,28 +23,36 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   $bairro = filter_input(INPUT_POST, "bairro", FILTER_SANITIZE_STRING);
   $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_NUMBER_INT);
 
+  //Busca no banco de dados se o e-mail digitado já foi cadastrado
+  $sql_code =  "SELECT email FROM funcionario WHERE email = '$email'";
+  $result_sql_code = mysqli_query($conexao, $sql_code);
+  $row_funcionario = mysqli_fetch_assoc($result_sql_code);
 
-  if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro) {
-    $mensagem = "Dados inválidos!";
+  if ($row_funcionario['email'] == $email) {
+    $mensagem = "<p style='margin:auto; color:red; font-weight: bold;' >E-mail já cadastrado!<p>";
   } else {
-    /*statement*/
-    $_SESSION['nome'] = $nome;
-    $_SESSION['data_nascimento'] = $data_nascimento;
-    $_SESSION['telefone'] = $telefone;
-    $_SESSION['email'] = $email;
-    $_SESSION['endereco'] = $endereco;
-    $_SESSION['numero'] = $numero;
-    $_SESSION['bairro'] = $bairro;
+    if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro) {
+      $mensagem = "Dados inválidos!";
+    } else {
+      /*statement*/
+      $_SESSION['nome'] = $nome;
+      $_SESSION['data_nascimento'] = $data_nascimento;
+      $_SESSION['telefone'] = $telefone;
+      $_SESSION['email'] = $email;
+      $_SESSION['endereco'] = $endereco;
+      $_SESSION['numero'] = $numero;
+      $_SESSION['bairro'] = $bairro;
 
-    //print_r($_SESSION); Imprime dados salvos da sessão
-    $status = true;
+      //print_r($_SESSION); Imprime dados salvos da sessão
+      $status = true;
 
-    header('Location: cadastro_funcionario2.php');
-    /*OBTEM O ULTIMO ID CADASTRADO 
+      header('Location: cadastro_funcionario2.php');
+      /*OBTEM O ULTIMO ID CADASTRADO 
         $conn->exec($result_usuario);
         $id_atual = $conn->lastInsertId();
         $_SESSION['lastID'] = $id_atual;
     */
+    }
   }
 }
 ?>
@@ -100,6 +110,9 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
+      <?php
+      echo $mensagem;
+      ?>
     </form>
   </main>
 </body>

@@ -1,6 +1,7 @@
 <?php
 session_start(); //inicia sessão(); - guarda login do ususário neste computador
 include "cabecalho.php";
+include "conexao.php";
 
 $nome = "";
 $data_nascimento = "";
@@ -11,6 +12,7 @@ $numero = "";
 $bairro = "";
 $genero = "";
 $status = false;
+$mensagem = "";
 
 if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST["email"], $_POST["endereco"], $_POST["bairro"], $_POST["numero"], $_POST["genero"])) {
   //filtrando inputs para remover caracteres que não correspondem ao padrão
@@ -23,9 +25,16 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
   $numero = filter_input(INPUT_POST, "numero", FILTER_SANITIZE_NUMBER_INT);
   $genero = filter_input(INPUT_POST, "genero", FILTER_SANITIZE_STRING);
 
+//Busca no banco de dados se o e-mail digitado já foi cadastrado
+  $sql_code =  "SELECT email FROM doador WHERE email = '$email'";
+  $result_sql_code = mysqli_query($conexao, $sql_code);
+  $row_doador = mysqli_fetch_assoc($result_sql_code);
 
+  if ($row_doador['email'] == $email ) {
+    $mensagem = "<p style='margin:auto; color:red; font-weight: bold;'>E-mail já cadastrado!</p>";
+  } else {
   if (!$nome || !$data_nascimento || !$telefone || !$email || !$endereco || !$numero || !$bairro || !$genero) {
-    $mensagem = "Dados inválidos!";
+  $mensagem = "<p style='margin:auto; color:red; font-weight: bold;'>Dados inválidos!</p>";
   } else {
     /*statement*/
     $_SESSION['nome'] = $nome;
@@ -47,6 +56,7 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
         $_SESSION['lastID'] = $id_atual;
     */
   }
+}
 }
 ?>
 
@@ -112,6 +122,9 @@ if (isset($_POST["nome"], $_POST["data_nascimento"], $_POST["telefone"], $_POST[
       <button class="btn-enviar" type="submit">
         <a id="enviar">Enviar</a>
       </button>
+      <?php
+        echo $mensagem;
+      ?>
     </form>
   </main>
 </body>
