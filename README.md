@@ -1,5 +1,7 @@
 # Sistema Web Para o Gerenciamento de Doações de Roupas
 
+**Danton R. Abreu, Iverton Adão S. Santos**
+
 1Tecnologia em Análise e Desenvolvimento de Sistemas - Instituto Federal de
 Educação, Ciência e Tecnologia Farroupilha Campus Alegrete (IFFar)
 Alegrete - RS -Brasil
