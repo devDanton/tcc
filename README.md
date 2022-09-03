@@ -40,6 +40,6 @@
     
     ![SingUp](imagens/images.mk/criarConta.png)
     
-10. Após isso basta acessar a tela inicial (tópico 8) novamente e clicar em **Entrar** e inserir seus usuário e senha cadastrados.
+10. Após isso basta acessar a tela inicial (tópico 8) novamente e clicar em [Entrar](http://localhost/TCC/login_funcionario.php) e inserir seus usuário e senha cadastrados.
     
     ![Login](imagens/images.mk/login.png)
